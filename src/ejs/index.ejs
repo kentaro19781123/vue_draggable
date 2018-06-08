@@ -32,11 +32,13 @@
   <div class="contents-detail">
       <draggable :options="{group:'ITEMS'}" v-model="myList">
           <div class="item" v-for="item, index in myList" :key="item.no">
-              <span>No.{{item.no}}</span>
+              <!-- <span>No.{{item.no}}</span> -->
               <label>
                   {{item.name}}
               </label><br>
-              <textarea placeholder="テキスト入れる"></textarea>
+              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
+              <br>{{item.input}}
+              <br><img src="item.img">
               <p><button type="button" v-on:click="deleteItem(item, index, '')">削除</button></p>
           </div>
       </draggable>
@@ -44,7 +46,7 @@
 
   <div id="parts-list">
     <div>
-        <button type="button" v-on:click="insertItem">リスト追加</button>
+        <button type="button" v-on:click="insertItem2">リスト追加</button>
     </div>
       <draggable :options="{group:'ITEMS'}" v-model="myList2">
           <div class="item" v-for="item, index in myList2" :key="item.no">
@@ -52,14 +54,15 @@
               <label>
                   {{item.name}}
               </label><br>
-              <textarea placeholder="テキスト入れる"></textarea>
+              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
+              <br>{{item.input}}
               <p><button type="button" v-on:click="deleteItem(item, index, '2')">削除</button></p>
           </div>
       </draggable>
   </div>
   <div id="parts-list">
     <div>
-        <button type="button" v-on:click="insertItem">リスト追加</button>
+        <button type="button" v-on:click="insertItem3">リスト追加</button>
     </div>
       <draggable :options="{group:'ITEMS'}" v-model="myList3">
           <div class="item" v-for="item, index in myList3" :key="item.no">
@@ -67,7 +70,8 @@
               <label>
                   {{item.name}}
               </label><br>
-              <textarea placeholder="テキスト入れる"></textarea>
+              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
+              <br>{{item.input}}
               <p><button type="button" v-on:click="deleteItem(item, index, '3')">削除</button></p>
           </div>
       </draggable>

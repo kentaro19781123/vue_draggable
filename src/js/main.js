@@ -122,63 +122,95 @@ var vm = new Vue({
     },
     data: {
         items:[
-              {no:1, name:'キャベツ', categoryNo:'1'},
-              {no:5, name:'きゅうり', categoryNo:'1'},
-              {no:9, name:'にんじん', categoryNo:'1'},
-              {no:10, name:'トマト', categoryNo:'1'}
+              {no:1, name:'キャベツ', categoryNo:'1',input:'text1',img:'http://my.gnavi.co.jp/restaurant/img/new/logo.png'},
+              {no:2, name:'きゅうり', categoryNo:'1',input:'text2',img:''},
+              {no:3, name:'にんじん', categoryNo:'1',input:'text3',img:''},
+              {no:4, name:'トマト', categoryNo:'1',input:'text4',img:''}
         ],
         items2:[
-            {no:2, name:'ステーキ', categoryNo:'2'},
-            {no:6, name:'ハンバーグ', categoryNo:'2'},
-            {no:11, name:'とんかつ', categoryNo:'2'},
-            {no:12, name:'からあげ', categoryNo:'2'}
+            {no:1, name:'ステーキ', categoryNo:'2',input:'text1',img:''}
         ],
         items3:[
-            {no:2, name:'ステーキ', categoryNo:'3'},
-            {no:6, name:'ハンバーグ', categoryNo:'3'},
-            {no:11, name:'とんかつ', categoryNo:'3'},
-            {no:12, name:'からあげ', categoryNo:'3'}
+            {no:1, name:'ステーキ', categoryNo:'3',input:'text1',img:''}
         ],
-
         newNo: 0
     },
     methods:{
-        insertItem: function(){
+        insertItem2: function(){
           var self = this;
           var no = 0;
 
-          if(self.items.concat().length > 0){
-              no =  Math.max.apply(null, self.items.concat().map(function(item){return item.no;})) +1;
-
-              self.newNo = self.newNo < no ? no:self.newNo;
-          }
+          // if(self.items.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
           if(self.items2.concat().length > 0){
               no =  Math.max.apply(null, self.items2.concat().map(function(item){return item.no;})) +1;
 
               self.newNo = self.newNo < no ? no:self.newNo;
           }
+          // if(self.items3.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items3.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
+
+          this.items2.push(
+            {
+              no:this.newNo,
+              name:'追加リスト'+ this.newNo,
+              categoryNo:'2',
+              input:'text'+this.newNo,
+              img:''
+            }
+          );
+          // this.items3.push(
+          //   {
+          //     no:this.newNo,
+          //     name:'追加リスト'+ this.newNo,
+          //     categoryNo:'3'
+          //   }
+          // );
+
+        },
+        insertItem3: function(){
+          var self = this;
+          var no = 0;
+
+          // if(self.items.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
+          // if(self.items2.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items2.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
           if(self.items3.concat().length > 0){
               no =  Math.max.apply(null, self.items3.concat().map(function(item){return item.no;})) +1;
 
               self.newNo = self.newNo < no ? no:self.newNo;
           }
 
-          this.items2.push(
-            {
-              no:this.newNo,
-              name:'追加リスト'+ this.newNo,
-              categoryNo:'5'
-            }
-          );
+          // this.items2.push(
+          //   {
+          //     no:this.newNo,
+          //     name:'追加リスト'+ this.newNo,
+          //     categoryNo:'2'
+          //   }
+          // );
           this.items3.push(
             {
               no:this.newNo,
               name:'追加リスト'+ this.newNo,
-              categoryNo:'5'
+              categoryNo:'3'
             }
           );
 
         },
+
         deleteItem: function(item, index, group){
             switch (group) {
                 case '':
