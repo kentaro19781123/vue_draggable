@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import draggable from 'vuedraggable'
-import appOptions from './app.vue'
-var app = new Vue(appOptions).$mount('#app');
 
 //import draggOptions from './draggable.vue'
 //var dragg = new Vue(draggOptions);
@@ -122,16 +120,16 @@ var vm = new Vue({
     },
     data: {
         items:[
-              {no:1, name:'キャベツ', categoryNo:'1',input:'text1',img:'http://my.gnavi.co.jp/restaurant/img/new/logo.png'},
-              {no:2, name:'きゅうり', categoryNo:'1',input:'text2',img:''},
-              {no:3, name:'にんじん', categoryNo:'1',input:'text3',img:''},
-              {no:4, name:'トマト', categoryNo:'1',input:'text4',img:''}
+          {type:1, name:'キャベツ', categoryNo:'1',text:'text1',img:'',img2:'',showImg:false,showInputImg:"true",showText:false,showInputText:"true"},
+          {type:1, name:'きゅうり', categoryNo:'1',text:'text2',img:'',img2:'',showImg:false,showInputImg:"true",showText:false,showInputText:"true"},
+          {type:2, name:'にんじん', categoryNo:'1',text:'text3',img:'',img2:'',showImg:false,showInputImg:"true",showText:false,showInputText:"true"},
+          {type:3, name:'トマト', categoryNo:'1',text:'text4',img:'',img2:'',showImg:false,showInputImg:"true",showText:false,showInputText:"true"}
         ],
         items2:[
-            {no:1, name:'ステーキ', categoryNo:'2',input:'text1',img:''}
+          {type:2, name:'２のステーキ', categoryNo:'2',text:'text1',showImg:false,showInputImg:"true",showText:false,showInputText:"true"}
         ],
         items3:[
-            {no:1, name:'ステーキ', categoryNo:'3',input:'text1',img:''}
+          {type:3, name:'３のステーキ', categoryNo:'3',text:'text1',img:'',img2:'',showImg:false,showInputImg:"true",showText:false,showInputText:"true"}
         ],
         newNo: 0
     },
@@ -145,11 +143,11 @@ var vm = new Vue({
           //
           //     self.newNo = self.newNo < no ? no:self.newNo;
           // }
-          if(self.items2.concat().length > 0){
-              no =  Math.max.apply(null, self.items2.concat().map(function(item){return item.no;})) +1;
-
-              self.newNo = self.newNo < no ? no:self.newNo;
-          }
+          // if(self.items2.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items2.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
           // if(self.items3.concat().length > 0){
           //     no =  Math.max.apply(null, self.items3.concat().map(function(item){return item.no;})) +1;
           //
@@ -158,11 +156,14 @@ var vm = new Vue({
 
           this.items2.push(
             {
-              no:this.newNo,
-              name:'追加リスト'+ this.newNo,
+              type:2,
+              name:'追加リスト',
               categoryNo:'2',
-              input:'text'+this.newNo,
-              img:''
+              text:'text',
+              showImg:false,
+              showInputImg:"true",
+              showText:false,
+              showInputText:"true"
             }
           );
           // this.items3.push(
@@ -188,11 +189,11 @@ var vm = new Vue({
           //
           //     self.newNo = self.newNo < no ? no:self.newNo;
           // }
-          if(self.items3.concat().length > 0){
-              no =  Math.max.apply(null, self.items3.concat().map(function(item){return item.no;})) +1;
-
-              self.newNo = self.newNo < no ? no:self.newNo;
-          }
+          // if(self.items3.concat().length > 0){
+          //     no =  Math.max.apply(null, self.items3.concat().map(function(item){return item.no;})) +1;
+          //
+          //     self.newNo = self.newNo < no ? no:self.newNo;
+          // }
 
           // this.items2.push(
           //   {
@@ -203,14 +204,42 @@ var vm = new Vue({
           // );
           this.items3.push(
             {
-              no:this.newNo,
-              name:'追加リスト'+ this.newNo,
-              categoryNo:'3'
+              type:3,
+              name:'追加リスト',
+              categoryNo:'3',
+              text:'text',
+              img:'',
+              img2:'',
+              showImg:false,
+              showInputImg:"true",
+              showText:false,
+              showInputText:"true"
             }
           );
 
         },
-
+        doActionImgInput: function (item, index) {
+          var self = this;
+          var itemImg2 = self.items[index].img2;
+          self.items[index].img = '<img src="' + itemImg2 + '">';
+          self.items[index].showImg = true;
+          self.items[index].showInputImg = false;
+        },
+        doActionImgShow: function (item, index) {
+          var self = this;
+          self.items[index].showImg = false;
+          self.items[index].showInputImg = true;
+        },
+        doActionTextInput: function (item, index) {
+          var self = this;
+          self.items[index].showText = true;
+          self.items[index].showInputText = false;
+        },
+        doActionTextShow: function (item, index) {
+          var self = this;
+          self.items[index].showText = false;
+          self.items[index].showInputText = true;
+        },
         deleteItem: function(item, index, group){
             switch (group) {
                 case '':

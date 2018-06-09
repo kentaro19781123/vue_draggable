@@ -13,7 +13,7 @@
 
     <!-- <div id="two">
       <div>
-        <button class="btn btn-info" type="button" v-on:click="insertItem">リスト追加</button>
+        <button class="btn btn-info" type="button" v-on:click="insertItem">パーツ追加</button>
       </div>
       <draggable :options="{ group: 'tasks' }" element="ul" v-for="list in tasks">
         <li v-for="(item, index) in list">{{item.name}}-(No.{{item.no}})-{{ index }}<br>
@@ -31,48 +31,113 @@
 
   <div class="contents-detail">
       <draggable :options="{group:'ITEMS'}" v-model="myList">
-          <div class="item" v-for="item, index in myList" :key="item.no">
-              <!-- <span>No.{{item.no}}</span> -->
+          <div class="item" v-for="item, index in myList">
+            <div v-if="item.type === 1">
+              1です。
+
+                <div v-show="item.showText" v-on:click="doActionTextShow(item, index)">
+                  {{item.text}}
+                </div>
+                <div v-show="item.showInputText">
+                  <textarea placeholder="テキスト入れる" v-model="item.text"></textarea>
+                  <input type="button" v-on:click="doActionTextInput(item, index)" value="決定">
+                </div>
+            </div>
+
+            <div v-else-if="item.type === 2">
+              2です。
+                <div v-show="item.showImg" v-on:click="doActionImgShow(item, index)">
+                  <p v-html="item.img"></p>
+                </div>
+                <div v-show="item.showInputImg">
+                  <input type="text" v-model="item.img2">
+                  <input type="button" v-on:click="doActionImgInput(item, index)" value="決定">
+                </div>
+            </div>
+
+            <div v-else>
+            ３です。
+            </div>
+
               <label>
                   {{item.name}}
-              </label><br>
-              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
-              <br>{{item.input}}
-              <br><img src="item.img">
-              <p><button type="button" v-on:click="deleteItem(item, index, '')">削除</button></p>
+              </label>
+
+              <!-- <div v-show="item.showText" v-on:click="doActionTextShow(item, index)">
+                {{item.text}}
+              </div>
+              <div v-show="item.showInputText">
+                <textarea placeholder="テキスト入れる" v-model="item.text"></textarea>
+                <input type="button" v-on:click="doActionTextInput(item, index)" value="決定">
+              </div> -->
+
+              <!-- <div v-show="item.showImg" v-on:click="doActionImgShow(item, index)">
+                <p v-html="item.img"></p>
+              </div>
+              <div v-show="item.showInputImg">
+                <input type="text" v-model="item.img2">
+                <input type="button" v-on:click="doActionImgInput(item, index)" value="決定">
+              </div> -->
+
+              <p class="del-btn"><button type="button" v-on:click="deleteItem(item, index, '')">削除</button></p>
           </div>
+
       </draggable>
   </div>
 
   <div id="parts-list">
     <div>
-        <button type="button" v-on:click="insertItem2">リスト追加</button>
+        <button type="button" v-on:click="insertItem2">パーツ追加</button>
     </div>
       <draggable :options="{group:'ITEMS'}" v-model="myList2">
-          <div class="item" v-for="item, index in myList2" :key="item.no">
-              <span>No.{{item.no}}</span>
+          <div class="item" v-for="item, index in myList2">
               <label>
                   {{item.name}}
-              </label><br>
-              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
-              <br>{{item.input}}
-              <p><button type="button" v-on:click="deleteItem(item, index, '2')">削除</button></p>
+              </label>
+
+              <div v-show="item.showText" v-on:click="doActionTextShow(item, index)">
+                {{item.text}}
+              </div>
+              <div v-show="item.showInputText">
+                <textarea placeholder="テキスト入れる" v-model="item.text"></textarea>
+                <input type="button" v-on:click="doActionTextInput(item, index)" value="決定">
+              </div>
+
+              <!-- <div v-show="item.showImg" v-on:click="doActionImgShow(item, index)">
+                <p v-html="item.img"></p>
+              </div>
+              <div v-show="item.showInputImg">
+                <input type="text" v-model="item.img2">
+                <input type="button" v-on:click="doActionImgInput(item, index)" value="決定">
+              </div> -->
           </div>
       </draggable>
   </div>
   <div id="parts-list">
     <div>
-        <button type="button" v-on:click="insertItem3">リスト追加</button>
+        <button type="button" v-on:click="insertItem3">パーツ追加</button>
     </div>
       <draggable :options="{group:'ITEMS'}" v-model="myList3">
-          <div class="item" v-for="item, index in myList3" :key="item.no">
-              <span>No.{{item.no}}</span>
+          <div class="item" v-for="item, index in myList3">
               <label>
                   {{item.name}}
-              </label><br>
-              <textarea placeholder="テキスト入れる" v-model="item.input"></textarea>
-              <br>{{item.input}}
-              <p><button type="button" v-on:click="deleteItem(item, index, '3')">削除</button></p>
+              </label>
+
+              <div v-show="item.showText" v-on:click="doActionTextShow(item, index)">
+                {{item.text}}
+              </div>
+              <div v-show="item.showInputText">
+                <textarea placeholder="テキスト入れる" v-model="item.text"></textarea>
+                <input type="button" v-on:click="doActionTextInput(item, index)" value="決定">
+              </div>
+
+              <div v-show="item.showImg" v-on:click="doActionImgShow(item, index)">
+                <p v-html="item.img"></p>
+              </div>
+              <div v-show="item.showInputImg">
+                <input type="text" v-model="item.img2">
+                <input type="button" v-on:click="doActionImgInput(item, index)" value="決定">
+              </div>
           </div>
       </draggable>
   </div>
@@ -83,7 +148,7 @@
 
     <!-- <div id="main">
         <div class="p20">
-          <button class="btn btn-info" type="button" v-on:click="insertItem">リスト追加</button>
+          <button class="btn btn-info" type="button" v-on:click="insertItem">パーツ追加</button>
        </div>
         <ul class="list-group drag p20">
           <draggable class="dragArea"
@@ -119,9 +184,15 @@
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 5px;
+  position: relative;
 }
 
-#parts-list {
+.del-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
 }
 </style>
 
